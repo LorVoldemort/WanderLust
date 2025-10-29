@@ -1,0 +1,117 @@
+<!-- <% layout("./layouts/boilerplate") %>
+<body>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+            
+            <%for(l of alllisting) {%>
+                <a href="http://localhost:3000/listing/<%= l.id %>" class="card-link">
+                    <div class="listing-card col card">
+                    <img src=" <%=l.img.url %>" class="card-img-top" alt="..." style="height: 20rem;">
+                     <div class="card-img-overlay"></div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <%= l.title%> <br>
+                                    &#8377; <%= l.price.toLocaleString("en-IN") %> / Night
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <%}%>
+        </div>
+    </body> -->
+
+
+<% layout("./layouts/boilerplate") %>
+
+    <body class="bg-light">
+        <div id="filters">
+            <div class="filter">
+                <div>
+                    <i class="fa-solid fa-fire"></i>
+                </div>
+                <p>Trending</p>
+            </div>
+            <div class="filter">
+                <div>
+                    <i class="fa-solid fa-bed"></i>
+                </div>
+                <p>Rooms</p>
+            </div>
+            <div class="filter">
+                <div>
+                    <i class="fa-solid fa-building-columns"></i>
+                </div>
+                <p>iconic cities</p>
+            </div>
+            <div class="filter">
+                <div>
+                    <i class="fa-solid fa-mountain"></i>
+                </div>
+                <p>Mountains</p>
+            </div>
+            <div class="filter">
+                <div>
+                    <i class="fa-solid fa-umbrella-beach"></i>
+                </div>
+                <p>Beach</p>
+            </div>
+            <div class="filter">
+                <div>
+                    <i class="fa-solid fa-campground"></i>
+                </div>
+                <p>Camping</p>
+            </div>
+            <div class="filter">
+                <div>
+                    <i class="fa-solid fa-tractor"></i>
+                </div>
+                <p>Farm house</p>
+            </div>
+            <div class="filter">
+                <div>
+                    <i class="fa-solid fa-snowflake"></i>
+                </div>
+                <p>Arctic</p>
+            </div>
+            <div class="tax-switch">
+                <div class=" form-switch form-check-reverse">
+                    <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+                    <label class="form-check-label" for="switchCheckDefault">Display total after taxes</label>
+                </div>
+            </div>
+        </div>
+        <div class="container py-4">
+            <h2 class="fw-bold mb-4 text-center text-dark">Explore Listings</h2>
+
+            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4 ">
+                <% for (l of alllisting) { %>
+                    <div class="col">
+                        <a href="http://localhost:3000/listing/<%= l.id %>" class="text-decoration-none text-dark">
+                            <div class="card listing-card shadow-sm border-0 h-100">
+                                <div class="position-relative">
+                                    <img src="<%= l.img.url %>" class="card-img-top" alt="<%= l.title %>"
+                                        style="height: 18rem; object-fit: cover; border-radius: 10px 10px 0 0;">
+                                    <div class="card-img-overlay d-flex justify-content-end align-items-start p-2">
+                                        <span class="badge bg-light text-dark px-2 py-1 shadow-sm">
+                                            ₹<%= l.price.toLocaleString("en-IN") %> / Night
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <h5 class="card-title fw-semibold mb-1">
+                                        <%= l.title %>
+                                    </h5>
+                                    <p class="card-text text-muted small mb-0">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <%= l.location %>, <%= l.country %>
+                                    </p>
+                                    <i class="tax-info">+18% GST</i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <% } %>
+            </div>
+        </div>
+        <script src="/JavaScript/gstScript.js"></script>
+    </body>

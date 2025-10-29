@@ -1,0 +1,208 @@
+<!-- <% layout("./layouts/boilerplate") %>
+    <link rel="stylesheet" href="style.css">
+
+    <body>
+        <br>
+        <h1>Edit Listing</h1>
+        <div class="col-8 offset-2">
+            <form action="http://localhost:3000/listing/<%= li.id %>?_method=PATCH" method="post"
+                class="needs-validation" novalidate enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="title" value="<%= li.title %>" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="description" id="description" class="form-control"
+                        required><%= li.description %></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="Image" class="form-label">Image preview</label>
+                    <br>
+                    <img src= "<%=newurl%>" alt="" height="200px" width="300px">
+                </div>
+                <div class="mb-3">
+                    <label for="img" class="form-label">Upload new Image</label>
+                    <input type="file" name="img" class="form-control">
+                </div>
+                <div class="row">
+
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" name="price" id="price" value="<%= li.price %>" class="form-control"
+                            required min="0">
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" name="location" id="location" value="<%= li.location%>" class="form-control"
+                            required>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="country" class="form-label">Country</label>
+                    <input type="text" name="country" value="<%= li.country %>" class="form-control" required>
+                </div>
+
+                <button class="btn btn-dark edit-btn mt-3">Submit</button>
+            </form>
+            <br><br>
+        </div>
+    </body> -->
+
+    <% layout("./layouts/boilerplate") %>
+<link rel="stylesheet" href="style.css">
+
+<body class="bg-light">
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h1 class="fw-bold text-dark">✏️ Edit Listing</h1>
+      <p class="text-muted">Update the details below to modify your listing.</p>
+    </div>
+
+    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4 p-md-5">
+          <form
+            action="http://localhost:3000/listing/<%= li.id %>?_method=PATCH"
+            method="post"
+            class="needs-validation"
+            novalidate
+            enctype="multipart/form-data"
+          >
+            <!-- Title -->
+            <div class="mb-4">
+              <label for="title" class="form-label fw-semibold">🏷️ Title</label>
+              <input
+                type="text"
+                name="title"
+                value="<%= li.title %>"
+                class="form-control form-control-lg"
+                required
+              />
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+              <label for="description" class="form-label fw-semibold">📝 Description</label>
+              <textarea
+                name="description"
+                id="description"
+                rows="4"
+                class="form-control form-control-lg"
+                required
+              ><%= li.description %></textarea>
+            </div>
+
+            <!-- Image Preview -->
+            <div class="mb-4">
+              <label for="Image" class="form-label fw-semibold">📸 Current Image</label>
+              <div class="border rounded-3 p-3 bg-light text-center">
+                <img
+                  src="<%= newurl %>"
+                  alt="Listing Image"
+                  class="img-fluid rounded-3 shadow-sm"
+                  style="max-height: 250px; object-fit: cover;"
+                />
+              </div>
+            </div>
+
+            <!-- Upload New Image -->
+            <div class="mb-4">
+              <label for="img" class="form-label fw-semibold">📂 Upload New Image</label>
+              <input type="file" name="img" class="form-control form-control-lg" />
+              <div class="form-text text-muted">
+                Optional — upload to replace the current image.
+              </div>
+            </div>
+
+            <!-- Price & Location -->
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <label for="price" class="form-label fw-semibold">💰 Price</label>
+                <input
+                  type="number"
+                  name="price"
+                  id="price"
+                  value="<%= li.price %>"
+                  class="form-control form-control-lg"
+                  required
+                  min="0"
+                />
+              </div>
+              <div class="col-md-8 mb-4">
+                <label for="location" class="form-label fw-semibold">📍 Location</label>
+                <input
+                  type="text"
+                  name="location"
+                  id="location"
+                  value="<%= li.location %>"
+                  class="form-control form-control-lg"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Country -->
+            <div class="mb-4">
+              <label for="country" class="form-label fw-semibold">🌎 Country</label>
+              <input
+                type="text"
+                name="country"
+                value="<%= li.country %>"
+                class="form-control form-control-lg"
+                required
+              />
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-dark btn-lg rounded-3 shadow-sm">
+                💾 Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional custom style for polish -->
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+
+    .card {
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-control:focus {
+      border-color: #000;
+      box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-dark {
+      background: linear-gradient(135deg, #000000, #434343);
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-dark:hover {
+      background: linear-gradient(135deg, #222, #666);
+      transform: translateY(-2px);
+    }
+
+    img {
+      transition: all 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.02);
+    }
+  </style>
+</body>

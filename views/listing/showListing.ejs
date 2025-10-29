@@ -1,0 +1,146 @@
+<% layout("./layouts/boilerplate") %>
+<script>
+    const loc = '<%=li.location%>';
+    const coun = '<%=li.country%>';
+</script>
+    <body class="bg-light">
+        <div class="container py-4">
+
+            <!-- Listing Title -->
+            <div class="text-center mb-4">
+                <h2 class="fw-bold text-dark">
+                    <%= li.title %>
+                </h2>
+            </div>
+
+            <!-- Listing Card -->
+            <!-- <div class="card shadow-lg mb-4 mx-auto" style="max-width: 700px; border-radius: 10px;">
+            <img src="<%= li.img.url %>" class="card-img-top rounded-top" alt="<%= li.title %>">
+            <div class="card-body">
+                <p class="mb-1 text-muted">
+                    <i class="bi bi-person-circle"></i> <%= li.owner.username %>
+                </p>
+                <p class="card-text mb-2"><%= li.description %></p>
+                <p class="fw-bold mb-2">₹ <%= li.price.toLocaleString("en-IN") %></p>
+                <p class="text-secondary mb-1"><i class="bi bi-geo-alt"></i> <%= li.location %>, <%= li.country %></p>
+            </div>
+        </div> -->
+            <!-- Listing Card -->
+            <div class="card shadow-lg mb-4 mx-auto border-0" style="max-width: 720px; border-radius: 12px;">
+                <img src="<%= li.img.url %>" class="card-img-top rounded-top" alt="<%= li.title %>">
+
+                <div class="card-body">
+                    <!-- <h4 class="card-title fw-bold text-dark mb-2">
+                        <%= li.title %>
+                    </h4> -->
+
+                    <p class="text-muted mb-1 small ms-1 mt-2">
+                        <i class="bi bi-person-circle"></i>
+                        Listed by <span class="fw-semibold text-dark">
+                            <%= li.owner.username %>
+                        </span>
+                    </p>
+
+                    <p class="card-text fs-6 lh-base text-secondary mb-3 ms-1">
+                        <%= li.description %>
+                    </p>
+
+                    <p class="fs-5 fw-semibold text-success mb-2 ms-1">
+                        ₹ <%= li.price.toLocaleString("en-IN") %>
+                    </p>
+
+                    <p class="text-muted mb-2 ms-1">
+                        <i class="bi bi-geo-alt-fill text-danger"></i>
+                        <span class="fw-medium">
+                            <%= li.location %>
+                        </span>, <%= li.country %>
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- Edit/Delete Buttons -->
+            <% if (currUser && currUser._id.equals(li.owner._id)) { %>
+                <div class="d-flex justify-content-center gap-3 mb-4">
+                    <a href="/listing/<%= li.id %>/edit" class="btn btn-outline-primary px-4">
+                        <i class="fa-solid fa-pen"></i> Edit
+                    </a>
+                    <form action="/listing/<%= li.id %>/delete?_method=DELETE" method="POST">
+                        <button class="btn btn-outline-danger px-4">
+                            <i class="fa-solid fa-trash"></i> Delete
+                        </button>
+                    </form>
+                </div>
+                <% } %>
+
+                    <!-- Review Form -->
+                    <% if (currUser) { %>
+                        <div class="card shadow-sm mb-4 mx-auto p-4" style="max-width: 700px;">
+                            <h4 class="mb-3 text-dark">Leave a Review</h4>
+                            <form action="/listing/<%= li.id %>/review" method="POST" class="needs-validation"
+                                novalidate>
+                                <div class="mb-3">
+                                    <fieldset class="starability-basic">
+                                        <legend class="form-label">Your Rating:</legend>
+                                        <input type="radio" id="rate1" name="rating" value="1" />
+                                        <label for="rate1" title="Terrible">1 star</label>
+                                        <input type="radio" id="rate2" name="rating" value="2" />
+                                        <label for="rate2" title="Not good">2 stars</label>
+                                        <input type="radio" id="rate3" name="rating" value="3" />
+                                        <label for="rate3" title="Average">3 stars</label>
+                                        <input type="radio" id="rate4" name="rating" value="4" />
+                                        <label for="rate4" title="Very good">4 stars</label>
+                                        <input type="radio" id="rate5" name="rating" value="5" />
+                                        <label for="rate5" title="Amazing">5 stars</label>
+                                    </fieldset>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="comment" class="form-label">Comment</label>
+                                    <textarea name="comment" id="comment" rows="4" class="form-control"
+                                        placeholder="Share your experience..." required></textarea>
+                                </div>
+
+                                <button class="btn btn-success px-4">Submit</button>
+                            </form>
+                        </div>
+                        <% } %>
+
+                            <!-- All Reviews -->
+                            <div class="mx-auto" style="max-width: 700px;">
+                                <h4 class="mb-3 fw-bold text-dark">All Reviews</h4>
+
+                                <% for (l of li.reviews) { %>
+                                    <div class="card mb-3 shadow-sm p-3">
+                                        <h5 class="card-title text-primary">
+                                            <i class="bi bi-person-circle"></i>
+                                            <%= l.author.username %>
+                                        </h5>
+                                        <p class="card-text mb-1">
+                                            <%= l.comment %>
+                                        </p>
+                                        <p class="starability-result card-text mb-2" data-rating="<%= l.rating %>">
+                                            Rated: <%= l.rating %> stars</p>
+
+                                        <% if (currUser && l.author._id.equals(currUser._id)) { %>
+                                            <form
+                                                action="/listing/<%= li.id %>/review/<%= l.id %>/delete?_method=DELETE"
+                                                method="POST">
+                                                <button class="btn btn-sm btn-outline-danger"> <i class="fa-solid fa-trash"></i> Delete</button>
+                                            </form>
+                                            <% } %>
+                                    </div>
+                                    <% } %>
+                            </div>
+
+                            <!-- Map Section -->
+                            <div class="mx-auto mt-4 mb-5" style="max-width: 700px;">
+                                <h5 class="text-dark mb-2">Location</h5>
+                                <div id="map" style="height: 300px; border-radius: 10px; overflow: hidden;"></div>
+                            </div>
+
+        </div>
+
+        <!-- External Script -->
+        <script src="/JavaScript/mapscript.js"></script>
+    </body>

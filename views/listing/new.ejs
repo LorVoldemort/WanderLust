@@ -1,0 +1,194 @@
+<!-- <% layout("./layouts/boilerplate") %>
+<body>
+    <br>
+    <h1>Create New Listing</h1>
+    <div class="col-8 offset-2">
+        <form action="http://localhost:3000/listing" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label"> Title</label>
+                <input type="text" name="title" id="title" placeholder=" title" class="form-control" required>
+                <div class="valid-feedback">
+                    Looks Good!
+                </div>
+                <div class="invalid-feedback">
+                    Please enter title
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label"> Description</label>
+                <textarea name="description" id="description" class="form-control"required ></textarea>
+                <div class="valid-feedback">Looks Good!</div>
+            </div>
+            <div class="mb-3">
+                <label for="img" class="form-label"> Upload Image</label>
+                <input type="file" name="img" placeholder=" link/url" class="form-control" >
+            </div>
+            <div class="row">
+
+                <div class="mb-3 col-md-4">
+                    <label for="price" class="form-label"> Price</label>
+                    <input type="number" name="price" id="price" placeholder=" price" class="form-control" required min="0">
+                    <div class="invalid-feedback">Please give correct pricing</div>
+                </div>
+                <div class="mb-3 col-md-8">
+                    <label for="location" class="form-label"> Location</label>
+                    <input type="text" name="location" id="location" placeholder=" location" class="form-control" required>
+                    <div class="invalid-feedback">Please entre location</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="country" class="form-label"> Country</label>
+                <input type="text" name="country" placeholder=" country" class="form-control" required>
+                <div class="invalid-feedback">Please enter country</div>
+            </div>
+            <button class="btn btn-dark add-btn">Add</button>
+            <br><br>
+        </form>
+    </div>
+</body> -->
+
+
+<% layout("./layouts/boilerplate") %>
+<body class="bg-light">
+    <style>
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+
+    .card {
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-control:focus {
+      border-color: #000;
+      box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-dark {
+      background: linear-gradient(135deg, #000000, #434343);
+      border: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-dark:hover {
+      background: linear-gradient(135deg, #222, #666);
+      transform: translateY(-2px);
+    }
+  </style>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h1 class="fw-bold text-dark">✨ Create New Listing</h1>
+      <p class="text-muted">Fill in the details below to add a new property listing.</p>
+    </div>
+
+    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body p-4 p-md-5">
+          <form
+            action="http://localhost:3000/listing"
+            method="post"
+            class="needs-validation"
+            novalidate
+            enctype="multipart/form-data"
+          >
+            <!-- Title -->
+            <div class="mb-4">
+              <label for="title" class="form-label fw-semibold">🏷️ Title</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                placeholder="Enter title"
+                class="form-control form-control-lg"
+                required
+              />
+              <div class="valid-feedback">Looks Good!</div>
+              <div class="invalid-feedback">Please enter a title</div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+              <label for="description" class="form-label fw-semibold">📝 Description</label>
+              <textarea
+                name="description"
+                id="description"
+                rows="4"
+                class="form-control form-control-lg"
+                placeholder="Write a short description..."
+                required
+              ></textarea>
+              <div class="valid-feedback">Looks Good!</div>
+            </div>
+
+            <!-- Upload Image -->
+            <div class="mb-4">
+              <label for="img" class="form-label fw-semibold">📸 Upload Image</label>
+              <input
+                type="file"
+                name="img"
+                id="img"
+                class="form-control form-control-lg"
+                required
+              />
+            </div>
+
+            <!-- Price & Location -->
+            <div class="row">
+              <div class="col-md-4 mb-4">
+                <label for="price" class="form-label fw-semibold">💰 Price</label>
+                <input
+                  type="number"
+                  name="price"
+                  id="price"
+                  placeholder="Enter price"
+                  class="form-control form-control-lg"
+                  required
+                  min="0"
+                />
+                <div class="invalid-feedback">Please provide a valid price</div>
+              </div>
+
+              <div class="col-md-8 mb-4">
+                <label for="location" class="form-label fw-semibold">📍 Location</label>
+                <input
+                  type="text"
+                  name="location"
+                  id="location"
+                  placeholder="Enter location"
+                  class="form-control form-control-lg"
+                  required
+                />
+                <div class="invalid-feedback">Please enter a location</div>
+              </div>
+            </div>
+
+            <!-- Country -->
+            <div class="mb-4">
+              <label for="country" class="form-label fw-semibold">🌎 Country</label>
+              <input
+                type="text"
+                name="country"
+                id="country"
+                placeholder="Enter country"
+                class="form-control form-control-lg"
+                required
+              />
+              <div class="invalid-feedback">Please enter a country</div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-dark btn-lg rounded-3 shadow-sm">
+                ➕ Add Listing
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
