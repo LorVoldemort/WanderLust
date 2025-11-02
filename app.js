@@ -77,9 +77,6 @@ app.use((req, res, next) => {
 })
 
 
-app.get('/',wrapAsync((req,res)=>{
-    res.redirect('/listing');
-}))
 
 app.use('/listing', listingRouter);
 app.use('/listing/:id/review', reviewRouter);
