@@ -21,13 +21,13 @@ let validateListing = (req, res, next) => {
 }
 
 router.get('/', wrapAsync(async (req, res) => {
+    console.log("In listing route")
     let alllisting = await Listing.find({});
     res.render('listing/index', { alllisting });
 
 }))
 
 router.get('/new', saveredirectUrl, isloggedIn, wrapAsync(async (req, res) => {
-    console.log(req.user);
     res.render('listing/new');
 }))
 

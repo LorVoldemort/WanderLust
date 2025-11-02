@@ -28,6 +28,7 @@ app.listen(PORT, () => {
 //default middleware
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, "public")));
+app.set('views',path.join(__dirname,'views'));
 app.engine('ejs', ejsMate);
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
@@ -76,7 +77,10 @@ app.use((req, res, next) => {
     next();
 })
 
-
+app.get('/',(req,res)=>{
+    console.log("In root route");
+    res.redirect('/listing');
+})
 
 app.use('/listing', listingRouter);
 app.use('/listing/:id/review', reviewRouter);
