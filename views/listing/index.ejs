@@ -85,7 +85,7 @@
             <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4 ">
                 <% for (l of alllisting) { %>
                     <div class="col">
-                        <a href="http://localhost:3000/listing/<%= l.id %>" class="text-decoration-none text-dark">
+                        <a href="/listing/<%= l.id %>" class="text-decoration-none text-dark">
                             <div class="card listing-card shadow-sm border-0 h-100">
                                 <div class="position-relative">
                                     <img src="<%= l.img.url %>" class="card-img-top" alt="<%= l.title %>"
