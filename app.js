@@ -16,11 +16,12 @@ const localStrategy = require('passport-local');
 const User = require('./models/user');
 const userRouter = require('./routes/user');
 const MongoStore = require('connect-mongo');
+const wrapAsync = require('./utils/wrapAsync');
 
 
-let app = express();
-let port = 3000;
-app.listen(port, () => {
+const app = express();
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
     console.log('Server is listening to port : 3000');
 });
 
@@ -75,6 +76,10 @@ app.use((req, res, next) => {
     next();
 })
 
+
+app.get('/',wrapAsync((req,res)=>{
+    res.redirect('/listing');
+}))
 
 app.use('/listing', listingRouter);
 app.use('/listing/:id/review', reviewRouter);
