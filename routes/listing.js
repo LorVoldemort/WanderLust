@@ -21,7 +21,6 @@ let validateListing = (req, res, next) => {
 }
 
 router.get('/', wrapAsync(async (req, res) => {
-    console.log("In listing route")
     let alllisting = await Listing.find({});
     res.render('listing/index', { alllisting });
 
